@@ -10,10 +10,11 @@ import usersRoutes from './routes/users.routes';
 
 class Server {
 	public app: express.Application;
-
+	//public productsRoutes: ProductsRoutes;
 	constructor() {
 		this.app = express();
 		this.config();
+		//this.productsRoutes = new ProductsRoutes();
 		this.routes();
 	}
 
@@ -24,6 +25,7 @@ class Server {
 			.connect(MONGO_URI || process.env.MONGODB_URL, {
 				useUnifiedTopology: true,
 				useNewUrlParser: true,
+				useCreateIndex: true,
 			})
 			.then((db) => console.log('DB is Connected to: ', MONGO_URI));
 
