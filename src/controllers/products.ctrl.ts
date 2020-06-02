@@ -1,13 +1,7 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product';
-
 export default class ProductsCtrl {
-	//router: Router;
-
-	constructor() {
-		//this.router = Router();
-		//this.routes();
-	}
+	constructor() {}
 
 	//All products
 	async getAll(req: Request, res: Response): Promise<void> {
@@ -16,7 +10,7 @@ export default class ProductsCtrl {
 	}
 
 	// Only one product for id
-	async getById(req: Request, res: Response): Promise<void> {
+	async getOne(req: Request, res: Response): Promise<void> {
 		//Parameters. http://localhost:3000/products/id
 		let product = await Product.findById(req.params.id);
 		res.json(product);
@@ -36,7 +30,7 @@ export default class ProductsCtrl {
 	}
 
 	//Update product
-	async update(req: Request, res: Response) {
+	async update(req: Request, res: Response): Promise<void> {
 		let product = await Product.findByIdAndUpdate(
 			{ _id: req.params.id },
 			req.body,
@@ -46,19 +40,8 @@ export default class ProductsCtrl {
 	}
 
 	//Delete product
-	async delete(req: Request, res: Response) {
+	async delete(req: Request, res: Response): Promise<void> {
 		let product = await Product.findByIdAndDelete(req.params);
-		res.json({ message: 'Product deleted!!!!' });
+		res.json({ message: `Product ${product} deleted!!!!` });
 	}
-
-	// routes() {
-	// 	this.router.get('/', this.getAll);
-	// 	this.router.get('/:id', this.getById);
-	// 	this.router.post('/', this.save);
-	// 	this.router.put('/:id', this.update);
-	// 	this.router.delete('/:id', this.delete);
-	// }
 }
-// const productsRoutes = new ProductsRoutes();
-
-// export default productsRoutes.router;

@@ -5,16 +5,19 @@ import indexRoutes from './routes/index.routes';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import cors from 'cors';
-import productsRoutes from './routes/products.routes';
-import usersRoutes from './routes/users.routes';
+import ProductsRoutes from './routes/products.routes';
+import UsersRoutes from './routes/users.routes';
 
 class Server {
 	public app: express.Application;
-	//public productsRoutes: ProductsRoutes;
+	public productsRoutes: ProductsRoutes;
+	public usersRoutes: UsersRoutes;
+
 	constructor() {
 		this.app = express();
 		this.config();
-		//this.productsRoutes = new ProductsRoutes();
+		this.productsRoutes = new ProductsRoutes();
+		this.usersRoutes = new UsersRoutes();
 		this.routes();
 	}
 
@@ -27,7 +30,7 @@ class Server {
 				useNewUrlParser: true,
 				useCreateIndex: true,
 			})
-			.then((db) => console.log('DB is Connected to: ', MONGO_URI));
+			.then(() => console.log('DB is Connected to: ', MONGO_URI));
 
 		//Settigs
 		this.app.set('port', process.env.PORT || 3000);
@@ -43,8 +46,8 @@ class Server {
 
 	routes() {
 		this.app.use(indexRoutes);
-		this.app.use('/api/products', productsRoutes);
-		this.app.use('/api/users', usersRoutes);
+		this.app.use('/api/products', this.productsRoutes.router);
+		this.app.use('/api/users', this.usersRoutes.router);
 	}
 
 	start() {
