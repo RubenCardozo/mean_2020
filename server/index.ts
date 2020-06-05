@@ -1,10 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import indexRoutes from './routes/index.routes';
 import mongoose from 'mongoose';
 import compression from 'compression';
 import cors from 'cors';
+import indexRoutes from './routes/index.routes';
 import ProductsRoutes from './routes/products.routes';
 import UsersRoutes from './routes/users.routes';
 
@@ -23,7 +23,7 @@ class Server {
 
 	config() {
 		const MONGO_URI = 'mongodb://localhost/MEAN_DB';
-		mongoose.set('useFindAndModify', true);
+		mongoose.set('useFindAndModify', false);
 		mongoose
 			.connect(MONGO_URI || process.env.MONGODB_URL, {
 				useUnifiedTopology: true,

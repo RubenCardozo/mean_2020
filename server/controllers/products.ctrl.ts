@@ -1,11 +1,9 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product';
 export default class ProductsCtrl {
-	constructor() {}
-
 	//All products
 	async getAll(req: Request, res: Response): Promise<void> {
-		const products = await Product.find();
+		const products = await Product.find(req.params);
 		res.json(products);
 	}
 

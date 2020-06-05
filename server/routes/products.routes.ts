@@ -8,7 +8,6 @@ export default class ProductsRoutes {
 	constructor() {
 		this.router = Router();
 		this.productsCtrl = new ProductsCtrl();
-
 		this.routes();
 	}
 
