@@ -1,0 +1,25 @@
+$primary: #4d7eda;
+$sucess: #10a110;
+
+main {
+  width: 100%;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+mat-card {
+  margin: auto;
+  width: 35%;
+  display: block;
+  margin-top: 2rem;
+}
+mat-form-field {
+  width: 100%;
+}
+.butLogin {
+  margin: auto;
+  background-color: $primary;
+  color: white;
+  display: block;
+  width: 20%;
+}
